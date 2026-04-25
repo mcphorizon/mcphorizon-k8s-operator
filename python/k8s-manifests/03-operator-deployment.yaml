@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mcp-operator
+  namespace: automationx
+  labels:
+    app: mcp-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mcp-operator
+  template:
+    metadata:
+      labels:
+        app: mcp-operator
+    spec:
+      serviceAccountName: mcp-operator
+      containers:
+        - name: operator
+          image: registry.68.220.202.177.nip.io/mcpoperator-python-operator:latest
+          imagePullPolicy: Always
+          env:
+            - name: OPERATOR_NAMESPACE
+              value: automationx
+            - name: APP_NAME
+              value: mcpoperator
+            - name: SERVER_IMAGE
+              value: registry.68.220.202.177.nip.io/mcpoperator-python:latest

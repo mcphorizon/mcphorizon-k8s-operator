@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mcp-server-registry
+  namespace: automationx
+data:
+  registry.yaml: |
+    services:
+      mcpoperator:
+        host: mcpoperator.68.220.202.177.nip.io
+        path: /mcp
+        namespaces:
+          - automationx
+        auth:
+          type: basic
+          basic:
+            secretName: mcpoperator-basic-auth
